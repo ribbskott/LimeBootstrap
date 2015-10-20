@@ -211,4 +211,4 @@ The different view can be opened with shortcuts provided the actionpad is in foc
 |   Reload actionpad | ctrl + shift + r |
 |   Open log | ctrl + shift + l |
 |   Open watch | ctrl + shift + w |
-|   Close log/watch window | q |
+|   Close log/watch window | escape |
