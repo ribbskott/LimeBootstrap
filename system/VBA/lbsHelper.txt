@@ -318,7 +318,7 @@ Public Sub CreateUpdateTranslation(ByVal sOwner As String, ByVal sCode As String
     Dim oRecord As New LDE.Record
 
     If Application.Classes("localize").Fields.Exists(sLanguage) = False Then
-        Call Application.MessageBox("Fältet '" & sLanguage & "' finns inte i tabellen '" & Application.Classes("localize").LocalName & "'.")
+        Call Application.MessageBox("FÃ¤ltet '" & sLanguage & "' finns inte i tabellen '" & Application.Classes("localize").LocalName & "'.")
         Exit Sub
     End If
 
@@ -377,3 +377,21 @@ ErrorHandler:
     Call UI.ShowError("LBSHelper.logToInfolog")
 End Sub
 
+'=============================================
+' Make LIME Cache the Activeuser Record
+' When using activeuser datasource in an actionpad, always call this sub on thisapplication.setup
+'=============================================
+Public Sub LoadActiveuser()
+On Error GoTo ErrorHandler
+    Dim oField As LDE.Field
+    Dim strTemp As String
+    If Not ActiveUser.Record Is Nothing Then
+        For Each oField In ActiveUser.Record.Fields
+            'just fetch the value for LDE to do some work and cache it
+            strTemp = ActiveUser.Record.Text(oField.Name)
+        Next
+    End If
+Exit Sub
+ErrorHandler:
+    Call UI.ShowError("LBSHelper.LoadActiveuser")
+End Sub
